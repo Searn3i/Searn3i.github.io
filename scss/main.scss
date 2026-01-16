@@ -1,5 +1,34 @@
+// --- RESET GLOBAL & VERROUILLAGE MOBILE ---
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden; // EMPECHE LE DÉCALAGE À DROITE
+    position: relative;
+}
+
+// Force le respect de la largeur sur tous les conteneurs principaux
+@media (max-width: 1024px) {
+    .app-container, 
+    .main-content, 
+    .sidebar {
+        width: 100% !important;
+        max-width: 100vw !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}
+
+// --- TES IMPORTS (Inchangés) ---
 @import 'utils/variables';
-@import 'base/reset';
+// Si l'import ci-dessous fait une erreur car le fichier n'existe pas, 
+// tu peux mettre deux slashs devant : // @import 'base/reset';
+@import 'base/reset'; 
 @import 'components/layout';
 @import 'components/sidebar';
 @import 'components/navbar';
