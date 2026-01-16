@@ -1,0 +1,49 @@
+.app-container {
+    display: flex; // Changement de grid à flex pour plus de flexibilité
+    justify-content: center; // Centre la sidebar et le contenu horizontalement
+    align-items: flex-start; // Aligne les deux blocs par le haut
+    gap: 25px;
+    
+    max-width: 1255px;
+    width: 100%;
+    margin: 60px auto; // 'auto' assure un centrage parfait, peu importe le zoom
+    padding: 0 20px;
+}
+
+.sidebar {
+    width: 280px; // Ta largeur fixe définie précédemment
+    flex-shrink: 0; // Empêche la sidebar de rétrécir sur les écrans moyens
+}
+
+.main-content {
+    width: 950px; // Ta largeur de contenu définie précédemment
+    flex-shrink: 1; // Permet au contenu de s'adapter si l'écran est un peu plus petit
+}
+
+.sidebar, .main-content {
+    background: $bg-card;
+    border: 1px solid $border-color;
+    border-radius: $radius;
+    padding: 30px;
+}
+
+// --- RESPONSIVITÉ (TABLETTE ET MOBILE) ---
+@media (max-width: 1024px) {
+    .app-container {
+        flex-direction: column; // Empile les éléments verticalement
+        align-items: center; // Centre la sidebar et le contenu sur mobile
+        margin: 20px auto;
+        gap: 20px;
+    }
+
+    .sidebar, .main-content {
+        width: 100%; // Les deux blocs prennent toute la largeur disponible
+        max-width: 500px; // Optionnel : limite la largeur sur mobile pour l'esthétique
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar, .main-content {
+        max-width: 100%; // Pleine largeur sur les petits téléphones
+    }
+}

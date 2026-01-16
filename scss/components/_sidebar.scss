@@ -1,0 +1,166 @@
+/* scss/components/_sidebar.scss */
+
+.sidebar {
+    height: fit-content;
+    position: sticky; 
+    top: 60px;
+    background: #1e1e1f;
+    border: 1px solid #383838;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    z-index: 10;
+
+    .sidebar-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 30px;
+
+        // --- LE CONTENEUR (Fixe, permet au point vert de dépasser) ---
+        .avatar-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            // Pas d'overflow ici pour que le point vert soit entièrement visible
+        }
+
+        // --- LA BOÎTE PIVOTANTE (Contient les images) ---
+        .avatar-box {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            perspective: 1000px; // Effet de profondeur 3D
+            border-radius: 50%;
+            overflow: hidden; // Coupe les coins des images pour le cercle
+            position: relative;
+            
+            img {
+                position: absolute;
+                top: 0; left: 0;
+                width: 100%; height: 100%;
+                object-fit: cover;
+
+                border-radius: 50%;
+                // 1. Force l'accélération matérielle sans perte de qualité
+                transform: translateZ(0);
+                // 2. Prévient le navigateur du changement pour optimiser le rendu
+                will-change: transform;
+                // 3. Améliore le rendu des images lors des mises à l'échelle
+                image-rendering: -webkit-optimize-contrast;
+                // 4. Force un lissage plus fin
+                -webkit-font-smoothing: antialiased;
+
+                transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+                backface-visibility: hidden; // Cache le dos de l'image pendant la rotation
+            }
+
+            .avatar-bitmoji {
+                z-index: 2;
+                transform: rotateY(0deg) scale(1.01);
+            }
+
+            .avatar-photo {
+                z-index: 1;
+                transform: rotateY(180deg); // Déjà retournée par défaut
+            }
+
+            // --- ANIMATION AU CLIC (Gérée par le JS) ---
+            &.is-flipped {
+                .avatar-bitmoji { transform: rotateY(180deg) scale(1.01); }
+                .avatar-photo { transform: rotateY(0deg) scale(1.01); z-index: 2; }
+            }
+        }
+
+        // --- LE POINT VERT (Désormais libre et visible) ---
+        .status-dot {
+            position: absolute;
+            bottom: 7px; // Placé sur le bord du cercle
+            right: 7px;
+            width: 20px;
+            height: 20px;
+            background: #28e115;
+            border: 3px solid #1e1e1f;
+            border-radius: 50%;
+            z-index: 10; // Passe au-dessus de l'avatar-box
+            pointer-events: none; // Permet de cliquer "à travers" le point
+            animation: pulse-green 2s infinite;
+        }
+
+        .name { font-size: 1.4rem; font-weight: 600; color: #ffffff; margin-bottom: 8px; }
+        .role-tag { 
+            background: #2b2b2c; font-size: 0.75rem; padding: 5px 15px;
+            border-radius: 8px; color: #ffffff; width: fit-content;
+        }
+    }
+
+    // --- SECTION CONTACTS ---
+    .sidebar-info {
+        border-top: 1px solid #383838;
+        padding-top: 30px;
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        text-align: left;
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            .icon-box {
+                flex-shrink: 0;
+                width: 44px;
+                height: 44px;
+                background: linear-gradient(to bottom right, #3f3f40 0%, #1e1e1f 100%);
+                border: 1px solid #383838;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+                i { color: #FFD60A !important; font-size: 1.1rem; }
+            }
+
+            .text {
+                overflow: hidden;
+                span { display: block; font-size: 0.65rem; color: #d6d6d6; text-transform: uppercase; margin-bottom: 2px; }
+                p { font-size: 0.85rem; color: #ffffff; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+            }
+        }
+    }
+
+    // --- RÉSEAUX SOCIAUX ---
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding-top: 20px;
+        a {
+            color: #d6d6d6 !important;
+            font-size: 1.1rem;
+            transition: 0.3s ease;
+            opacity: 0.6;
+            &:hover { color: #ffffff; opacity: 1; transform: translateY(-3px); }
+        }
+    }
+}
+
+// --- ANIMATION DU POINT VERT ---
+@keyframes pulse-green {
+    0% { box-shadow: 0 0 0 0 rgba(40, 225, 21, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(40, 225, 21, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(40, 225, 21, 0); }
+}
+
+
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 100%; // Prend toute la largeur
+        position: static; // Ne reste plus collée en haut pour laisser défiler la page
+        padding: 20px;
+    }
+}

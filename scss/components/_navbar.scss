@@ -1,0 +1,64 @@
+/* scss/components/_navbar.scss */
+
+.navbar {
+    position: absolute; // Positionnement sur ordinateur
+    top: 0;
+    right: 0;
+    background: #2b2b2c;
+    border: 1px solid #383838;
+    border-radius: 0 20px;
+    padding: 0 20px;
+    z-index: 5;
+
+    .nav-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding: 0 10px;
+        list-style: none;
+    }
+
+    .nav-link {
+        color: #d6d6d6;
+        font-size: 0.9rem;
+        font-weight: 500;
+        padding: 20px 7px;
+        transition: 0.3s ease;
+        border: none;
+        background: none;
+        cursor: pointer;
+
+        &:hover, &.active { color: #FFD60A; } // Couleur Gold pour l'état actif
+    }
+}
+
+// --- RESPONSIVITÉ : NAVBAR MOBILE COMPACTE ---
+@media (max-width: 768px) {
+    .navbar {
+        position: fixed; // Fixée au bas de l'écran
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background: rgba(30, 30, 31, 0.9); // Fond sombre transparent
+        backdrop-filter: blur(10px); // Effet de flou moderne (Glassmorphism)
+        border-radius: 20px 20px 0 0; // Arrondi en haut uniquement
+        border: none;
+        border-top: 1px solid #383838;
+        padding: 5px 0;
+        z-index: 100;
+
+        .nav-list {
+            justify-content: space-around; // Distribue les boutons sur toute la largeur
+            padding: 0;
+        }
+
+        .nav-link {
+            font-size: 0.75rem; // Taille réduite pour mobile
+            padding: 15px 5px;
+            text-transform: capitalize;
+        }
+    }
+}

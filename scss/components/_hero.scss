@@ -1,0 +1,74 @@
+// scss/components/_hero.scss
+
+.hero-section {
+    height: 100vh; // Prend tout l'écran
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding-top: $nav-height;
+
+    .container {
+        text-align: center;
+        max-width: 800px;
+    }
+
+    .hero-subtitle {
+        color: $accent-primary;
+        font-family: $font-heading;
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        letter-spacing: 2px;
+    }
+
+    .hero-title {
+        font-family: $font-heading;
+        font-size: 4rem; // Très gros titre
+        font-weight: 700;
+        line-height: 1.1;
+        margin-bottom: 30px;
+
+        .highlight {
+            color: $text-muted; // Ou un dégradé si tu préfères
+        }
+    }
+
+    .typewriter-text {
+        font-size: 1.5rem;
+        color: $text-muted;
+        margin-bottom: 50px;
+        min-height: 1.6em; // Pour éviter que ça saute
+    }
+
+    .hero-btns {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+
+        .btn {
+            padding: 15px 30px;
+            border-radius: $border-radius;
+            font-weight: 600;
+            transition: $transition-fast;
+            cursor: pointer;
+        }
+
+        .btn-filled {
+            background: $accent-primary;
+            color: $bg-color;
+            
+            &:hover {
+                transform: translateY(-3px); // Petit saut
+                box-shadow: 0 10px 20px rgba($accent-primary, 0.2);
+            }
+        }
+
+        .btn-outline {
+            border: 1px solid $text-main;
+            
+            &:hover {
+                background: rgba(255,255,255,0.1);
+            }
+        }
+    }
+}
