@@ -8,16 +8,23 @@
 html, body {
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden; // Évite le glissement
+    overflow-x: hidden; // Empêche le site de glisser à droite
     position: relative;
+    background-color: #121212; // Sécurité : assure que le fond est bien noir partout
 }
 
-// FORCE L'OCCUPATION TOTALE DE L'ESPACE SUR MOBILE
+// FORCE L'OCCUPATION TOTALE (BORD À BORD) SUR MOBILE
 @media (max-width: 1024px) {
+    // On force le body à ne pas avoir de marges parasites
+    body {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
     .app-container {
         width: 100% !important;
         max-width: 100% !important;
-        padding: 10px !important; // Un tout petit bord pour l'élégance
+        padding: 0 !important; // C'EST ICI LA CLÉ : 0px pour coller aux bords
         margin: 0 !important;
     }
 
@@ -25,7 +32,8 @@ html, body {
     .sidebar {
         width: 100% !important;
         max-width: 100% !important;
-        margin: 0 0 15px 0 !important; // Espace uniquement entre les blocs
+        // On garde juste une marge en bas pour séparer les blocs, mais 0 sur les côtés
+        margin: 0 0 15px 0 !important; 
     }
 }
 

@@ -1,38 +1,56 @@
+/* scss/components/_layout.scss */
+
 .app-container {
-    display: flex; // Changement de grid à flex pour plus de flexibilité
-    justify-content: center; // Centre la sidebar et le contenu horizontalement
-    align-items: flex-start; // Aligne les deux blocs par le haut
+    display: flex; 
+    justify-content: center; 
+    align-items: flex-start; 
     gap: 25px;
     
     max-width: 1255px;
     width: 100%;
-    margin: 60px auto; // 'auto' assure un centrage parfait, peu importe le zoom
+    margin: 60px auto; 
     padding: 0 20px;
+
+    // --- RESPONSIVITÉ (TABLETTE ET MOBILE) ---
+    @media (max-width: 1024px) {
+        flex-direction: column; 
+        align-items: center; 
+        margin: 0 !important; // Supprime les marges haut/bas pour coller au bord
+        gap: 0; // On colle les blocs entre eux pour un look application
+        padding: 0 !important; // SUPPRIME LES BANDES NOIRES LATÉRALES
+        width: 100% !important;
+        max-width: 100% !important;
+    }
 }
 
 .sidebar {
-    width: 280px; // Ta largeur fixe définie précédemment
-    flex-shrink: 0; // Empêche la sidebar de rétrécir sur les écrans moyens
+    width: 280px; 
+    flex-shrink: 0; 
 }
 
 .main-content {
-    width: 950px; // Ta largeur de contenu définie précédemment
-    flex-shrink: 1; // Permet au contenu de s'adapter si l'écran est un peu plus petit
+    width: 950px; 
+    flex-shrink: 1; 
 }
 
 .sidebar, .main-content {
-    background: $bg-card;
-    border: 1px solid $border-color;
-    border-radius: $radius;
+    background: #1e1e1f; // Utilisation directe pour éviter les erreurs de variable
+    border: 1px solid #383838;
+    border-radius: 20px;
     padding: 30px;
+
+    @media (max-width: 1024px) {
+        width: 100% !important; // Force l'occupation de toute la largeur
+        max-width: 100% !important;
+        border-radius: 0; // Look bord à bord (edge-to-edge) comme chez Apple
+        border-left: none; // On enlève les bordures latérales pour gagner chaque pixel
+        border-right: none;
+        padding: 25px 20px; // Padding interne pour que le texte ne touche pas le bord de l'écran
+    }
 }
 
-// --- RESPONSIVITÉ (TABLETTE ET MOBILE) ---
-@media (max-width: 1024px) {
-    .app-container {
-        flex-direction: column; // Empile les éléments verticalement
-        align-items: center; // Centre la sidebar et le contenu sur mobile
-        margin: 20px auto;
-        gap: 20px;
+@media (max-width: 768px) {
+    .sidebar, .main-content {
+        max-width: 100%; 
     }
 }

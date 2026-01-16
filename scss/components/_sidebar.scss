@@ -143,17 +143,22 @@
     100% { box-shadow: 0 0 0 0 rgba(40, 225, 21, 0); }
 }
 
-// --- CONFIGURATION MOBILE PLEIN ÉCRAN (BORD À BORD) ---
+// --- CONFIGURATION MOBILE TYPE APPLE (BORD À BORD) ---
 @media (max-width: 1024px) {
     .sidebar {
-        width: 100% !important; // Occupe toute la largeur de l'écran
+        width: 100% !important; // FORCE l'occupation totale
         max-width: 100% !important;
         position: static;
         padding: 15px !important; 
         max-height: 100px; 
         text-align: left;
-        margin: 0 0 15px 0 !important; // Supprime les espaces noirs latéraux
-        border-radius: 0 0 20px 20px; // Optionnel : bords arrondis uniquement en bas pour coller au haut
+        margin: 0 !important; // Supprime toute marge externe
+        
+        // Style "Application" : pas de bordures sur les côtés
+        border-left: none !important;
+        border-right: none !important;
+        border-top: none !important;
+        border-radius: 0 0 25px 25px; // Arrondi uniquement en bas
 
         &.active {
             max-height: 1000px; 
@@ -166,6 +171,7 @@
             align-items: center !important;
             gap: 15px;
             margin-bottom: 0;
+            width: 100%; // S'assure que le contenu interne prend toute la place
 
             .avatar-container {
                 width: 60px !important; 
@@ -180,19 +186,19 @@
                 }
             }
 
-            // --- CENTRAGE DU TAG SOUS LE NOM ---
+            // --- CENTRAGE PARFAIT DU TAG ---
             .header-info {
                 display: flex;
                 flex-direction: column;
-                align-items: center; // Aligne verticalement le tag sous le milieu du nom
+                align-items: center; // Aligne le tag au centre par rapport au nom
                 text-align: center;
-                flex-grow: 1; // Remplit l'espace pour un centrage parfait
+                flex-grow: 1; // Force ce bloc à prendre l'espace restant
             }
 
             .name { 
                 font-size: 1.1rem; 
                 margin-bottom: 2px;
-                white-space: nowrap; // Empêche le nom de se couper
+                white-space: nowrap; 
             }
             
             .role-tag { 
@@ -202,7 +208,7 @@
             }
 
             .info-toggle-btn {
-                display: block; // Visible uniquement sur mobile
+                display: block; 
             }
         }
 
