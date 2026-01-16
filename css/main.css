@@ -173,8 +173,53 @@ button {
   border: 3px solid #1e1e1f;
   border-radius: 50%;
   z-index: 10;
-  pointer-events: none;
+  cursor: help;
   animation: pulse-green 2s infinite;
+  /* --- BULLE "AVAILABLE FOR WORK" --- */
+  /* Petite flèche au-dessus de la bulle (Optionnel mais stylé) */
+}
+.sidebar .sidebar-header .status-dot::after {
+  content: attr(data-title); /* Utilise data-title pour éviter le doublon blanc */
+  position: absolute;
+  top: 100%; /* Place la bulle EN DESSOUS du point */
+  left: 50%;
+  transform: translateX(-50%); /* Centre la bulle par rapport au point */
+  margin-top: 10px; /* Petit espace entre le point et la bulle */
+  background: #2b2b2c;
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  white-space: nowrap; /* Empêche le texte de revenir à la ligne */
+  width: -moz-max-content;
+  width: max-content; /* Force la largeur à s'adapter au texte (évite la coupure) */
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s ease;
+  border: 1px solid #383838;
+  pointer-events: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+}
+.sidebar .sidebar-header .status-dot::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 4px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent #2b2b2c transparent;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s ease;
+  z-index: 100;
+}
+.sidebar .sidebar-header .status-dot:hover::after, .sidebar .sidebar-header .status-dot:hover::before {
+  opacity: 1;
+  visibility: visible;
 }
 .sidebar .sidebar-header .name {
   font-size: 1.4rem;

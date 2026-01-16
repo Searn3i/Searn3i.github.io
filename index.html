@@ -10,12 +10,11 @@
 
     <style>
 
-         /* ===============================
+        /* ===============================
            FIX ESPACE NOIR MOBILE
            =============================== */
 
         /* Le canvas ne doit JAMAIS pousser le contenu */
-
         #bg-canvas {
             position: fixed;
             inset: 0;
@@ -57,7 +56,7 @@
                 margin: 0 !important;
                 width: 100% !important;
                 max-width: 100% !important;
-                border-radius: 0 0 20px 20px !important; /* Arrondi juste en bas */
+                border-radius: 0 0 20px 20px !important;
                 border-top: none !important;
                 border-left: none !important;
                 border-right: none !important;
@@ -72,7 +71,60 @@
                 max-width: 100% !important;
                 border-radius: 0 !important;
                 border: none !important;
-                padding-bottom: 80px !important; /* Espace pour le scroll */
+                padding-bottom: 80px !important;
+            }
+
+            /* 5. FIX SERVICES (WHAT I'M DOING) - Empilement propre */
+            .services-grid {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 20px !important;
+            }
+
+            .service-card {
+                width: 100% !important;
+                padding: 20px !important;
+                height: auto !important;
+                min-height: 0 !important;
+            }
+
+            .service-icon { margin-bottom: 10px !important; }
+            .service-content h4 { font-size: 1.1rem !important; margin-bottom: 5px !important; }
+            .service-content p { font-size: 0.9rem !important; line-height: 1.4 !important; }
+
+            /* 6. FIX SKILLS (LOGOS TROP GROS) - Rendu Pro Compact */
+            .skills-banner {
+                display: flex !important;
+                flex-wrap: wrap !important; /* Permet aux logos de passer à la ligne */
+                justify-content: center !important; /* Centre le tout */
+                gap: 15px !important; /* Espace entre les logos */
+                padding: 10px 0 !important;
+                background: transparent !important;
+                box-shadow: none !important;
+            }
+
+            .skill-card {
+                width: 60px !important;   /* Taille FIXE et plus petite */
+                height: 60px !important;
+                padding: 12px !important; /* Espace interne pour que le logo respire */
+                background: #2b2b2c !important; /* Petit fond gris pro */
+                border-radius: 12px !important; /* Coins arrondis */
+                border: 1px solid #383838 !important; /* Bordure subtile */
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important;
+            }
+
+            .skill-card img {
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: contain !important; /* Assure que le logo ne soit jamais déformé */
+            }
+
+            /* On cache la barre de scroll personnalisée qui n'est plus utile en mode grille */
+            .skills-scrollbar-container {
+                display: none !important;
             }
         }
     </style>
@@ -89,7 +141,7 @@
                         <img src="./assets/images/my-photo.png" alt="Photo réelle" class="avatar-photo">
                     </div>
     
-                    <span class="status-dot" title="Available for work!"></span>
+                    <span class="status-dot" data-title="Available for work!"></span>
                 </div>
                 
                 <div class="header-info">
