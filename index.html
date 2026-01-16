@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nasser's Personal Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/main.css">
 
     <style>
-
-        /* ===============================
+        
+         /* ===============================
            FIX ESPACE NOIR MOBILE
            =============================== */
 
@@ -74,7 +78,7 @@
                 padding-bottom: 80px !important;
             }
 
-            /* 5. FIX SERVICES (WHAT I'M DOING) - Empilement propre */
+            /* 5. FIX SERVICES (WHAT I'M DOING) */
             .services-grid {
                 display: flex !important;
                 flex-direction: column !important;
@@ -92,24 +96,24 @@
             .service-content h4 { font-size: 1.1rem !important; margin-bottom: 5px !important; }
             .service-content p { font-size: 0.9rem !important; line-height: 1.4 !important; }
 
-            /* 6. FIX SKILLS (LOGOS TROP GROS) - Rendu Pro Compact */
+            /* 6. FIX SKILLS (LOGOS TROP GROS) */
             .skills-banner {
                 display: flex !important;
-                flex-wrap: wrap !important; /* Permet aux logos de passer à la ligne */
-                justify-content: center !important; /* Centre le tout */
-                gap: 15px !important; /* Espace entre les logos */
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                gap: 15px !important;
                 padding: 10px 0 !important;
                 background: transparent !important;
                 box-shadow: none !important;
             }
 
             .skill-card {
-                width: 60px !important;   /* Taille FIXE et plus petite */
+                width: 60px !important;
                 height: 60px !important;
-                padding: 12px !important; /* Espace interne pour que le logo respire */
-                background: #2b2b2c !important; /* Petit fond gris pro */
-                border-radius: 12px !important; /* Coins arrondis */
-                border: 1px solid #383838 !important; /* Bordure subtile */
+                padding: 12px !important;
+                background: #2b2b2c !important;
+                border-radius: 12px !important;
+                border: 1px solid #383838 !important;
                 display: flex !important;
                 align-items: center !important;
                 justify-content: center !important;
@@ -119,12 +123,46 @@
             .skill-card img {
                 width: 100% !important;
                 height: 100% !important;
-                object-fit: contain !important; /* Assure que le logo ne soit jamais déformé */
+                object-fit: contain !important;
             }
 
-            /* On cache la barre de scroll personnalisée qui n'est plus utile en mode grille */
-            .skills-scrollbar-container {
-                display: none !important;
+            .skills-scrollbar-container { display: none !important; }
+
+            /* 7. FIX HEADER ALIGNMENT (CENTRAGE C.S STUDENT) */
+            .sidebar-header {
+                display: flex !important;
+                flex-direction: row !important; /* Garde l'avatar à gauche */
+                align-items: center !important; /* Aligne verticalement */
+                gap: 15px !important;
+            }
+
+            .avatar-container {
+                margin: 0 !important; /* Supprime les marges parasites */
+                width: 60px !important;
+                height: 60px !important;
+            }
+
+            /* C'EST ICI QUE SE JOUE LE CENTRAGE */
+            .header-info {
+                flex-grow: 1 !important; /* Prend tout l'espace restant à droite */
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important; /* <--- FORCE LE CENTRAGE HORIZONTAL */
+                justify-content: center !important;
+                text-align: center !important;
+            }
+
+            .name {
+                margin: 0 !important;
+                font-size: 1.1rem !important;
+                line-height: 1.2 !important;
+            }
+
+            .role-tag {
+                margin: 5px 0 0 0 !important; /* Petit espace au-dessus */
+                display: inline-block !important; /* S'assure qu'il ne prend pas toute la largeur */
+                font-size: 0.7rem !important;
+                padding: 4px 12px !important;
             }
         }
     </style>
