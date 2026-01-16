@@ -11,7 +11,7 @@
     text-align: center;
     z-index: 10;
     
-    // Logique de déploiement
+    // Logique de déploiement (Toggle)
     max-height: 1000px; 
     overflow: hidden;
     transition: max-height 0.5s ease-in-out;
@@ -84,7 +84,7 @@
         }
 
         .info-toggle-btn {
-            display: none; // Caché sur PC
+            display: none; 
             position: absolute;
             top: -5px;
             right: -5px;
@@ -143,15 +143,17 @@
     100% { box-shadow: 0 0 0 0 rgba(40, 225, 21, 0); }
 }
 
-// --- CONFIGURATION MOBILE IDENTIQUE AU MODÈLE ---
+// --- CONFIGURATION MOBILE PLEIN ÉCRAN (BORD À BORD) ---
 @media (max-width: 1024px) {
     .sidebar {
-        width: 100% !important;
-        max-width: 100vw !important;
+        width: 100% !important; // Occupe toute la largeur de l'écran
+        max-width: 100% !important;
         position: static;
         padding: 15px !important; 
         max-height: 100px; 
         text-align: left;
+        margin: 0 0 15px 0 !important; // Supprime les espaces noirs latéraux
+        border-radius: 0 0 20px 20px; // Optionnel : bords arrondis uniquement en bas pour coller au haut
 
         &.active {
             max-height: 1000px; 
@@ -159,7 +161,7 @@
         }
 
         .sidebar-header {
-            flex-direction: row !important; 
+            flex-direction: row !important; // Avatar et Nom sur la même ligne
             justify-content: flex-start !important;
             align-items: center !important;
             gap: 15px;
@@ -169,30 +171,38 @@
                 width: 60px !important; 
                 height: 60px !important;
                 margin: 0 !important;
+                flex-shrink: 0;
 
                 .status-dot { 
-                    width: 12px;
-                    height: 12px;
-                    bottom: 2px;
-                    right: 2px;
+                    width: 12px; height: 12px;
+                    bottom: 2px; right: 2px;
                     border-width: 2px;
                 }
             }
 
-            // MODIFICATION ICI POUR CENTRER LE TAG SOUS LE NOM
+            // --- CENTRAGE DU TAG SOUS LE NOM ---
             .header-info {
                 display: flex;
                 flex-direction: column;
-                align-items: center; // Aligne les enfants au centre de ce bloc
-                text-align: center; // Centre le texte
-                flex-grow: 1; // Occupe l'espace restant pour bien se caler
+                align-items: center; // Aligne verticalement le tag sous le milieu du nom
+                text-align: center;
+                flex-grow: 1; // Remplit l'espace pour un centrage parfait
             }
 
-            .name { font-size: 1.1rem; margin-bottom: 2px; }
-            .role-tag { font-size: 0.65rem; padding: 3px 12px; }
+            .name { 
+                font-size: 1.1rem; 
+                margin-bottom: 2px;
+                white-space: nowrap; // Empêche le nom de se couper
+            }
+            
+            .role-tag { 
+                font-size: 0.65rem; 
+                padding: 3px 12px; 
+                margin: 0;
+            }
 
             .info-toggle-btn {
-                display: block; 
+                display: block; // Visible uniquement sur mobile
             }
         }
 
