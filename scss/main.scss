@@ -1,4 +1,6 @@
-/* --- 1. D'ABORD LES IMPORTS (Pour charger les bases) --- */
+/* scss/main.scss */
+
+// --- 1. LES IMPORTS ---
 @import 'utils/variables';
 @import 'base/reset'; 
 @import 'components/layout';
@@ -10,63 +12,52 @@
 @import 'components/contact';
 @import 'components/blog';
 
-/* --- 2. ENSUITE LES CORRECTIONS (Pour écraser les erreurs) --- */
+// --- 2. CONFIGURATION DES ÉCRANS ---
 
-// Reset global de sécurité
-* {
-    box-sizing: border-box;
-}
+/* ============================================================
+   FIX ULTIME MOBILE - A COLLER TOUT EN BAS DE MAIN.SCSS
+   Ce bloc écrase tout ce qui a été chargé avant.
+   ============================================================ */
 
-// On force le body à prendre toute la largeur
-html, body {
-    width: 100%;
-    overflow-x: hidden;
-    background-color: #121212; // Fond noir uniforme
-}
-
-/* --- 3. LE CORRECTIF MOBILE (C'est ici que la magie opère) --- */
 @media (max-width: 1024px) {
     
-    // ON TUE LE PADDING DE 60PX QUI POSE PROBLÈME
-    body {
-        padding: 0 !important; 
+    // 1. ON TUE LE PADDING ET LE FLEX DU BODY (Le coupable vu dans l'inspecteur)
+    html, body {
+        padding: 0 !important;       /* Supprime les 60px du haut */
         margin: 0 !important;
-        display: block !important; // On désactive le flex qui centre tout bizarrement
+        display: block !important;   /* Annule le centrage vertical */
+        width: 100% !important;
         height: auto !important;
-        min-height: 100vh;
+        overflow-x: hidden;          /* Empêche le scroll horizontal */
+        position: static !important; /* Réinitialise la position */
     }
 
-    // On force le conteneur à toucher les bords (0px)
+    // 2. ON REMONTE LE CONTENEUR AU PIXEL 0
     .app-container {
+        margin: 0 !important;        /* Colle au haut de l'écran */
+        padding: 0 !important;       /* Colle aux bords gauche/droite */
         width: 100% !important;
         max-width: 100% !important;
-        padding: 0 !important; // Zéro espace sur les côtés
-        margin: 0 !important;
-        gap: 0 !important; // Colle la sidebar au contenu
-        display: flex;
-        flex-direction: column;
+        gap: 0 !important;
+        transform: none !important;  /* Sécurité anti-décalage */
     }
 
-    // On force les blocs à s'étaler
-    .sidebar, 
-    .main-content {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 !important;
-        border-radius: 0 !important; // Bords carrés pour coller à l'écran
-        border-left: none !important;
-        border-right: none !important;
-    }
-
-    // Petit ajustement esthétique pour séparer le haut du bas
+    // 3. ON COLLE LA SIDEBAR AU PLAFOND
     .sidebar {
-        border-bottom: 1px solid #383838;
-        z-index: 100; // S'assure qu'elle reste au-dessus
+        position: sticky !important;
+        top: 0 !important;           /* Force le contact avec le haut */
+        margin: 0 !important;
+        border-radius: 0 0 20px 20px !important; /* Arrondi juste en bas */
+        border: none !important;     /* Supprime les bordures qui prennent de la place */
+        background: #1e1e1f !important;
+        z-index: 9999;
     }
-    
-    // Le contenu principal prend la suite
+
+    // 4. ON COLLE LE CONTENU EN DESSOUS
     .main-content {
-        min-height: 100vh; // Remplit le reste de l'écran
-        padding-bottom: 80px !important; // Laisse de la place pour le menu du bas
+        margin: 0 !important;
+        padding: 20px !important;
+        border-radius: 0 !important;
+        width: 100% !important;
     }
 }

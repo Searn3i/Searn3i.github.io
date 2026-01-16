@@ -1,9 +1,33 @@
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { 
-    background-color: $bg-main; 
-    color: $text-white; 
-    font-family: 'Poppins', sans-serif;
-    padding: 60px 0;
-    display: flex; justify-content: center;
+/* scss/base/_reset.scss */
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
 }
-button { cursor: pointer; font-family: inherit; }
+
+body { 
+    background-color: #121212; // Ton fond noir
+    color: #fafafa; 
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.5;
+    
+    // --- CONFIGURATION ORDINATEUR (Plus de 1025px) ---
+    @media (min-width: 1025px) {
+        padding: 60px 0;
+        display: flex; 
+        justify-content: center;
+    }
+
+    // --- CONFIGURATION MOBILE (BORD À BORD TOTAL) ---
+    @media (max-width: 1024px) {
+        padding: 0 !important; // Tue le vide en haut
+        display: block !important; // Prend toute la largeur
+        width: 100% !important;
+    }
+}
+
+button { 
+    cursor: pointer; 
+    font-family: inherit; 
+}

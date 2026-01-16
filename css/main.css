@@ -1,5 +1,6 @@
 @charset "UTF-8";
-/* --- 1. D'ABORD LES IMPORTS (Pour charger les bases) --- */
+/* scss/main.scss */
+/* scss/base/_reset.scss */
 * {
   margin: 0;
   padding: 0;
@@ -10,9 +11,21 @@ body {
   background-color: #121212;
   color: #fafafa;
   font-family: "Poppins", sans-serif;
-  padding: 60px 0;
-  display: flex;
-  justify-content: center;
+  line-height: 1.5;
+}
+@media (min-width: 1025px) {
+  body {
+    padding: 60px 0;
+    display: flex;
+    justify-content: center;
+  }
+}
+@media (max-width: 1024px) {
+  body {
+    padding: 0 !important;
+    display: block !important;
+    width: 100% !important;
+  }
 }
 
 button {
@@ -20,58 +33,63 @@ button {
   font-family: inherit;
 }
 
-/* scss/components/_layout.scss */
+/* scss/layout/_layout.scss */
 .app-container {
   display: flex;
-  justify-content: center;
   align-items: flex-start;
-  gap: 25px;
-  max-width: 1255px;
+  gap: 30px;
+  max-width: 1300px;
   width: 100%;
   margin: 60px auto;
-  padding: 0 20px;
+  padding: 0;
 }
 @media (max-width: 1024px) {
   .app-container {
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    justify-content: flex-start;
     margin: 0 !important;
     gap: 0;
-    padding: 0 !important;
     width: 100% !important;
     max-width: 100% !important;
+    padding: 0 !important;
   }
 }
 
 .sidebar {
-  width: 280px;
+  width: 300px;
   flex-shrink: 0;
 }
 
 .main-content {
-  width: 950px;
-  flex-shrink: 1;
+  flex: 1;
+  min-width: 0;
 }
 
-.sidebar, .main-content {
+.sidebar,
+.main-content {
   background: #1e1e1f;
   border: 1px solid #383838;
   border-radius: 20px;
   padding: 30px;
 }
 @media (max-width: 1024px) {
-  .sidebar, .main-content {
+  .sidebar,
+  .main-content {
     width: 100% !important;
     max-width: 100% !important;
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
     padding: 25px 20px;
+    margin: 0 !important;
   }
 }
 
 @media (max-width: 768px) {
-  .sidebar, .main-content {
+  .sidebar,
+  .main-content {
     max-width: 100%;
   }
 }
@@ -922,50 +940,41 @@ button {
   overflow: hidden;
 }
 
-/* --- 2. ENSUITE LES CORRECTIONS (Pour écraser les erreurs) --- */
-* {
-  box-sizing: border-box;
-}
-
-html, body {
-  width: 100%;
-  overflow-x: hidden;
-  background-color: #121212;
-}
-
-/* --- 3. LE CORRECTIF MOBILE (C'est ici que la magie opère) --- */
+/* ============================================================
+   FIX ULTIME MOBILE - A COLLER TOUT EN BAS DE MAIN.SCSS
+   Ce bloc écrase tout ce qui a été chargé avant.
+   ============================================================ */
 @media (max-width: 1024px) {
-  body {
-    padding: 0 !important;
+  html, body {
+    padding: 0 !important; /* Supprime les 60px du haut */
     margin: 0 !important;
-    display: block !important;
+    display: block !important; /* Annule le centrage vertical */
+    width: 100% !important;
     height: auto !important;
-    min-height: 100vh;
+    overflow-x: hidden; /* Empêche le scroll horizontal */
+    position: static !important; /* Réinitialise la position */
   }
   .app-container {
+    margin: 0 !important; /* Colle au haut de l'écran */
+    padding: 0 !important; /* Colle aux bords gauche/droite */
     width: 100% !important;
     max-width: 100% !important;
-    padding: 0 !important;
-    margin: 0 !important;
     gap: 0 !important;
-    display: flex;
-    flex-direction: column;
-  }
-  .sidebar,
-  .main-content {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    border-radius: 0 !important;
-    border-left: none !important;
-    border-right: none !important;
+    transform: none !important; /* Sécurité anti-décalage */
   }
   .sidebar {
-    border-bottom: 1px solid #383838;
-    z-index: 100;
+    position: sticky !important;
+    top: 0 !important; /* Force le contact avec le haut */
+    margin: 0 !important;
+    border-radius: 0 0 20px 20px !important; /* Arrondi juste en bas */
+    border: none !important; /* Supprime les bordures qui prennent de la place */
+    background: #1e1e1f !important;
+    z-index: 9999;
   }
   .main-content {
-    min-height: 100vh;
-    padding-bottom: 80px !important;
+    margin: 0 !important;
+    padding: 20px !important;
+    border-radius: 0 !important;
+    width: 100% !important;
   }
 }

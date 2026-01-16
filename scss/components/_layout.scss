@@ -1,56 +1,60 @@
-/* scss/components/_layout.scss */
+/* scss/layout/_layout.scss */
 
 .app-container {
-    display: flex; 
-    justify-content: center; 
-    align-items: flex-start; 
-    gap: 25px;
-    
-    max-width: 1255px;
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+
+    max-width: 1300px;      // largeur maîtrisée comme portfolio pro
     width: 100%;
-    margin: 60px auto; 
-    padding: 0 20px;
+    margin: 60px auto;      // CENTRAGE RÉEL dans le viewport
+    padding: 0;             // évite tout faux décalage visuel
 
     // --- RESPONSIVITÉ (TABLETTE ET MOBILE) ---
     @media (max-width: 1024px) {
-        flex-direction: column; 
-        align-items: center; 
-        margin: 0 !important; // Supprime les marges haut/bas pour coller au bord
-        gap: 0; // On colle les blocs entre eux pour un look application
-        padding: 0 !important; // SUPPRIME LES BANDES NOIRES LATÉRALES
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        margin: 0 !important;
+        gap: 0;
         width: 100% !important;
         max-width: 100% !important;
+        padding: 0 !important;
     }
 }
 
 .sidebar {
-    width: 280px; 
-    flex-shrink: 0; 
+    width: 300px;           // largeur sidebar plus équilibrée
+    flex-shrink: 0;
 }
 
 .main-content {
-    width: 950px; 
-    flex-shrink: 1; 
+    flex: 1;                // s’adapte naturellement
+    min-width: 0;           // évite overflow discret
 }
 
-.sidebar, .main-content {
-    background: #1e1e1f; // Utilisation directe pour éviter les erreurs de variable
+.sidebar,
+.main-content {
+    background: #1e1e1f;
     border: 1px solid #383838;
     border-radius: 20px;
     padding: 30px;
 
     @media (max-width: 1024px) {
-        width: 100% !important; // Force l'occupation de toute la largeur
+        width: 100% !important;
         max-width: 100% !important;
-        border-radius: 0; // Look bord à bord (edge-to-edge) comme chez Apple
-        border-left: none; // On enlève les bordures latérales pour gagner chaque pixel
-        border-right: none;
-        padding: 25px 20px; // Padding interne pour que le texte ne touche pas le bord de l'écran
+        border-radius: 0 !important;
+        border-left: none !important;
+        border-right: none !important;
+        border-top: none !important;
+        padding: 25px 20px;
+        margin: 0 !important;
     }
 }
 
 @media (max-width: 768px) {
-    .sidebar, .main-content {
-        max-width: 100%; 
+    .sidebar,
+    .main-content {
+        max-width: 100%;
     }
 }
