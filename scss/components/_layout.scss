@@ -1,39 +1,29 @@
-/* scss/components/_layout.scss */
-
 .app-container {
-    display: flex; 
-    justify-content: center; 
-    align-items: flex-start; 
+    display: flex;
+    justify-content: center;
     gap: 25px;
-    
     max-width: 1255px;
     width: 100%;
-    margin: 60px auto; 
+    margin: 60px auto;
     padding: 0 20px;
 
-    // --- CORRECTION DU DÉCALAGE SUR MOBILE ---
     @media (max-width: 1024px) {
-        flex-direction: column; 
-        align-items: center; 
-        margin: 15px auto; // Marges réduites comme sur ton modèle
-        gap: 15px;
-        padding: 0 12px; // Espacement minimal sur les côtés
-        width: 100%;
-        overflow-x: hidden; // EMPÊCHE LE SITE DE GLISSER VERS LA DROITE
+        flex-direction: column;
+        align-items: center;
+        margin: 15px auto;
+        padding: 0 15px; // Espacement propre sur les bords
+        width: 100% !important;
+        overflow: hidden; 
     }
 }
 
-.sidebar {
-    width: 280px; 
-    flex-shrink: 0; 
-}
-
 .main-content {
-    width: 950px; 
-    flex-shrink: 1; 
+    width: 950px;
+    min-width: 0; // Permet au flexbox de réduire la taille sous 950px
 
     @media (max-width: 1024px) {
-        width: 100% !important; // FORCE LA LARGEUR TOTALE (Supprime les 950px qui causaient le décalage)
+        width: 100% !important; // Supprime les 950px sur mobile
+        max-width: 100%;
     }
 }
 
