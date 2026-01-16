@@ -1,35 +1,5 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html, body {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-  position: relative;
-  background-color: #121212;
-}
-
-@media (max-width: 1024px) {
-  body {
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-  .app-container {
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-  .main-content,
-  .sidebar {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 0 15px 0 !important;
-  }
-}
+@charset "UTF-8";
+/* --- 1. D'ABORD LES IMPORTS (Pour charger les bases) --- */
 * {
   margin: 0;
   padding: 0;
@@ -950,4 +920,52 @@ button {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* --- 2. ENSUITE LES CORRECTIONS (Pour écraser les erreurs) --- */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  background-color: #121212;
+}
+
+/* --- 3. LE CORRECTIF MOBILE (C'est ici que la magie opère) --- */
+@media (max-width: 1024px) {
+  body {
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    height: auto !important;
+    min-height: 100vh;
+  }
+  .app-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    gap: 0 !important;
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar,
+  .main-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+  }
+  .sidebar {
+    border-bottom: 1px solid #383838;
+    z-index: 100;
+  }
+  .main-content {
+    min-height: 100vh;
+    padding-bottom: 80px !important;
+  }
 }

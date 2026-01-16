@@ -1,43 +1,4 @@
-// --- RESET GLOBAL & VERROUILLAGE MOBILE ---
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html, body {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden; // Empêche le site de glisser à droite
-    position: relative;
-    background-color: #121212; // Sécurité : assure que le fond est bien noir partout
-}
-
-// FORCE L'OCCUPATION TOTALE (BORD À BORD) SUR MOBILE
-@media (max-width: 1024px) {
-    // On force le body à ne pas avoir de marges parasites
-    body {
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-
-    .app-container {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding: 0 !important; // C'EST ICI LA CLÉ : 0px pour coller aux bords
-        margin: 0 !important;
-    }
-
-    .main-content, 
-    .sidebar {
-        width: 100% !important;
-        max-width: 100% !important;
-        // On garde juste une marge en bas pour séparer les blocs, mais 0 sur les côtés
-        margin: 0 0 15px 0 !important; 
-    }
-}
-
-// --- TES IMPORTS ---
+/* --- 1. D'ABORD LES IMPORTS (Pour charger les bases) --- */
 @import 'utils/variables';
 @import 'base/reset'; 
 @import 'components/layout';
@@ -48,3 +9,64 @@ html, body {
 @import 'components/portfolio';
 @import 'components/contact';
 @import 'components/blog';
+
+/* --- 2. ENSUITE LES CORRECTIONS (Pour écraser les erreurs) --- */
+
+// Reset global de sécurité
+* {
+    box-sizing: border-box;
+}
+
+// On force le body à prendre toute la largeur
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+    background-color: #121212; // Fond noir uniforme
+}
+
+/* --- 3. LE CORRECTIF MOBILE (C'est ici que la magie opère) --- */
+@media (max-width: 1024px) {
+    
+    // ON TUE LE PADDING DE 60PX QUI POSE PROBLÈME
+    body {
+        padding: 0 !important; 
+        margin: 0 !important;
+        display: block !important; // On désactive le flex qui centre tout bizarrement
+        height: auto !important;
+        min-height: 100vh;
+    }
+
+    // On force le conteneur à toucher les bords (0px)
+    .app-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important; // Zéro espace sur les côtés
+        margin: 0 !important;
+        gap: 0 !important; // Colle la sidebar au contenu
+        display: flex;
+        flex-direction: column;
+    }
+
+    // On force les blocs à s'étaler
+    .sidebar, 
+    .main-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        border-radius: 0 !important; // Bords carrés pour coller à l'écran
+        border-left: none !important;
+        border-right: none !important;
+    }
+
+    // Petit ajustement esthétique pour séparer le haut du bas
+    .sidebar {
+        border-bottom: 1px solid #383838;
+        z-index: 100; // S'assure qu'elle reste au-dessus
+    }
+    
+    // Le contenu principal prend la suite
+    .main-content {
+        min-height: 100vh; // Remplit le reste de l'écran
+        padding-bottom: 80px !important; // Laisse de la place pour le menu du bas
+    }
+}
