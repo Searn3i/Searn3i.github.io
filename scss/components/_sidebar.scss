@@ -10,7 +10,8 @@
     padding: 30px;
     text-align: center;
     z-index: 10;
-    // --- AJOUT POUR LE TOGGLE ---
+    
+    // Logique de déploiement
     max-height: 1000px; 
     overflow: hidden;
     transition: max-height 0.5s ease-in-out;
@@ -20,9 +21,8 @@
         flex-direction: column;
         align-items: center;
         margin-bottom: 30px;
-        position: relative; // Pour positionner le bouton toggle
+        position: relative; 
 
-        // --- LE CONTENEUR (Avatar) ---
         .avatar-container {
             position: relative;
             width: 150px;
@@ -83,9 +83,8 @@
             border-radius: 8px; color: #ffffff; width: fit-content;
         }
 
-        // --- BOUTON TOGGLE (Caché sur PC) ---
         .info-toggle-btn {
-            display: none;
+            display: none; // Caché sur PC
             position: absolute;
             top: -5px;
             right: -5px;
@@ -98,7 +97,6 @@
             cursor: pointer;
             z-index: 11;
             transition: 0.3s ease;
-            
             i { transition: 0.3s ease; }
         }
     }
@@ -145,48 +143,56 @@
     100% { box-shadow: 0 0 0 0 rgba(40, 225, 21, 0); }
 }
 
-// --- CONFIGURATION MOBILE TYPE IMAGE RÉFÉRENCE ---
+// --- CONFIGURATION MOBILE IDENTIQUE AU MODÈLE ---
 @media (max-width: 1024px) {
     .sidebar {
         width: 100%;
         position: static;
-        padding: 20px;
-        max-height: 115px; // État fermé (compact)
+        padding: 15px !important; // Padding réduit comme sur ton image
+        max-height: 100px; // Très compact au chargement
         text-align: left;
 
         &.active {
-            max-height: 1000px; // État ouvert
-            
+            max-height: 1000px; 
             .info-toggle-btn i { transform: rotate(180deg); }
         }
 
         .sidebar-header {
-            flex-direction: row; // Alignement horizontal
-            justify-content: flex-start;
-            gap: 20px;
+            flex-direction: row !important; // Alignement horizontal avatar + nom
+            justify-content: flex-start !important;
+            align-items: center !important;
+            gap: 15px;
             margin-bottom: 0;
 
             .avatar-container {
-                width: 80px; // Plus petit sur mobile
-                height: 80px;
-                margin: 0;
+                width: 60px !important; // Taille exacte du modèle
+                height: 60px !important;
+                margin: 0 !important;
+
+                .status-dot { // Point vert ajusté pour le petit avatar
+                    width: 12px;
+                    height: 12px;
+                    bottom: 2px;
+                    right: 2px;
+                    border-width: 2px;
+                }
             }
 
             .header-info {
-                text-align: left;
+                text-align: left !important;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
             }
 
-            .name { font-size: 1.1rem; margin-bottom: 4px; }
+            .name { font-size: 1.1rem; margin-bottom: 2px; }
+            .role-tag { font-size: 0.6rem; padding: 2px 8px; }
 
             .info-toggle-btn {
-                display: block; // On l'affiche uniquement ici
+                display: block; // On l'affiche uniquement sur mobile
             }
         }
 
-        // Cache les infos quand c'est fermé
         .sidebar-more-info {
             transition: 0.5s ease;
         }

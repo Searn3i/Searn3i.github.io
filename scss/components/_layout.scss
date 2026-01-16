@@ -1,23 +1,40 @@
+/* scss/components/_layout.scss */
+
 .app-container {
-    display: flex; // Changement de grid à flex pour plus de flexibilité
-    justify-content: center; // Centre la sidebar et le contenu horizontalement
-    align-items: flex-start; // Aligne les deux blocs par le haut
+    display: flex; 
+    justify-content: center; 
+    align-items: flex-start; 
     gap: 25px;
     
     max-width: 1255px;
     width: 100%;
-    margin: 60px auto; // 'auto' assure un centrage parfait, peu importe le zoom
+    margin: 60px auto; 
     padding: 0 20px;
+
+    // --- CORRECTION DU DÉCALAGE SUR MOBILE ---
+    @media (max-width: 1024px) {
+        flex-direction: column; 
+        align-items: center; 
+        margin: 15px auto; // Marges réduites comme sur ton modèle
+        gap: 15px;
+        padding: 0 12px; // Espacement minimal sur les côtés
+        width: 100%;
+        overflow-x: hidden; // EMPÊCHE LE SITE DE GLISSER VERS LA DROITE
+    }
 }
 
 .sidebar {
-    width: 280px; // Ta largeur fixe définie précédemment
-    flex-shrink: 0; // Empêche la sidebar de rétrécir sur les écrans moyens
+    width: 280px; 
+    flex-shrink: 0; 
 }
 
 .main-content {
-    width: 950px; // Ta largeur de contenu définie précédemment
-    flex-shrink: 1; // Permet au contenu de s'adapter si l'écran est un peu plus petit
+    width: 950px; 
+    flex-shrink: 1; 
+
+    @media (max-width: 1024px) {
+        width: 100% !important; // FORCE LA LARGEUR TOTALE (Supprime les 950px qui causaient le décalage)
+    }
 }
 
 .sidebar, .main-content {
@@ -25,25 +42,17 @@
     border: 1px solid $border-color;
     border-radius: $radius;
     padding: 30px;
-}
 
-// --- RESPONSIVITÉ (TABLETTE ET MOBILE) ---
-@media (max-width: 1024px) {
-    .app-container {
-        flex-direction: column; // Empile les éléments verticalement
-        align-items: center; // Centre la sidebar et le contenu sur mobile
-        margin: 20px auto;
-        gap: 20px;
-    }
-
-    .sidebar, .main-content {
-        width: 100%; // Les deux blocs prennent toute la largeur disponible
-        max-width: 500px; // Optionnel : limite la largeur sur mobile pour l'esthétique
+    @media (max-width: 1024px) {
+        padding: 20px 15px; // Padding plus fin pour gagner de l'espace sur mobile
+        width: 100%;
+        max-width: 100%; // On enlève la limite des 500px pour que ça remplisse bien l'écran
     }
 }
 
+// Nettoyage final pour les petits écrans
 @media (max-width: 768px) {
     .sidebar, .main-content {
-        max-width: 100%; // Pleine largeur sur les petits téléphones
+        border-radius: 15px; // Arrondis légèrement plus petits sur téléphone
     }
 }

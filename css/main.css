@@ -18,6 +18,7 @@ button {
   font-family: inherit;
 }
 
+/* scss/components/_layout.scss */
 .app-container {
   display: flex;
   justify-content: center;
@@ -27,6 +28,17 @@ button {
   width: 100%;
   margin: 60px auto;
   padding: 0 20px;
+}
+@media (max-width: 1024px) {
+  .app-container {
+    flex-direction: column;
+    align-items: center;
+    margin: 15px auto;
+    gap: 15px;
+    padding: 0 12px;
+    width: 100%;
+    overflow-x: hidden;
+  }
 }
 
 .sidebar {
@@ -38,6 +50,11 @@ button {
   width: 950px;
   flex-shrink: 1;
 }
+@media (max-width: 1024px) {
+  .main-content {
+    width: 100% !important;
+  }
+}
 
 .sidebar, .main-content {
   background: #1e1e1f;
@@ -45,22 +62,17 @@ button {
   border-radius: 20px;
   padding: 30px;
 }
-
 @media (max-width: 1024px) {
-  .app-container {
-    flex-direction: column;
-    align-items: center;
-    margin: 20px auto;
-    gap: 20px;
-  }
   .sidebar, .main-content {
+    padding: 20px 15px;
     width: 100%;
-    max-width: 500px;
+    max-width: 100%;
   }
 }
+
 @media (max-width: 768px) {
   .sidebar, .main-content {
-    max-width: 100%;
+    border-radius: 15px;
   }
 }
 /* scss/components/_sidebar.scss */
@@ -252,8 +264,8 @@ button {
   .sidebar {
     width: 100%;
     position: static;
-    padding: 20px;
-    max-height: 115px;
+    padding: 15px !important;
+    max-height: 100px;
     text-align: left;
   }
   .sidebar.active {
@@ -263,25 +275,37 @@ button {
     transform: rotate(180deg);
   }
   .sidebar .sidebar-header {
-    flex-direction: row;
-    justify-content: flex-start;
-    gap: 20px;
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    gap: 15px;
     margin-bottom: 0;
   }
   .sidebar .sidebar-header .avatar-container {
-    width: 80px;
-    height: 80px;
-    margin: 0;
+    width: 60px !important;
+    height: 60px !important;
+    margin: 0 !important;
+  }
+  .sidebar .sidebar-header .avatar-container .status-dot {
+    width: 12px;
+    height: 12px;
+    bottom: 2px;
+    right: 2px;
+    border-width: 2px;
   }
   .sidebar .sidebar-header .header-info {
-    text-align: left;
+    text-align: left !important;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
   .sidebar .sidebar-header .name {
     font-size: 1.1rem;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
+  }
+  .sidebar .sidebar-header .role-tag {
+    font-size: 0.6rem;
+    padding: 2px 8px;
   }
   .sidebar .sidebar-header .info-toggle-btn {
     display: block;
@@ -350,13 +374,22 @@ button {
     text-transform: capitalize;
   }
 }
+/* scss/components/_content.scss */
 .main-content {
   position: relative;
   min-height: 850px;
+  width: 100%;
+}
+@media (max-width: 1024px) {
+  .main-content {
+    min-height: auto;
+    padding-bottom: 80px;
+  }
 }
 .main-content .section-title {
   font-size: 2rem;
   margin-bottom: 25px;
+  position: relative;
 }
 .main-content .section-title::after {
   content: "";
@@ -367,6 +400,11 @@ button {
   border-radius: 3px;
   margin-top: 10px;
 }
+@media (max-width: 1024px) {
+  .main-content .section-title {
+    font-size: 1.5rem;
+  }
+}
 .main-content .content-section {
   display: none;
 }
@@ -374,23 +412,10 @@ button {
   display: block;
   animation: fadeIn 0.5s;
 }
-.main-content .services-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin-top: 25px;
-}
-.main-content .services-grid .service-card {
-  background: #2b2b2c;
-  border: 1px solid #383838;
-  padding: 25px;
-  border-radius: 15px;
-  display: flex;
-  gap: 20px;
-}
-.main-content .services-grid .service-card i {
-  color: #FFD60A;
-  font-size: 2rem;
+@media (max-width: 1024px) {
+  .main-content .content-section {
+    padding: 10px 5px;
+  }
 }
 
 @keyframes fadeIn {
@@ -410,10 +435,22 @@ button {
 .about-text p {
   margin-bottom: 20px;
 }
+@media (max-width: 1024px) {
+  .about-text {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    text-align: justify;
+  }
+}
 
 .subsection-title {
   font-size: 1.5rem;
   margin: 30px 0 25px;
+}
+@media (max-width: 1024px) {
+  .subsection-title {
+    font-size: 1.2rem;
+  }
 }
 
 .services-grid {
@@ -421,6 +458,12 @@ button {
   grid-template-columns: 1fr 1fr;
   gap: 25px;
   margin-bottom: 50px;
+}
+@media (max-width: 768px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
 }
 .services-grid .service-card {
   background: linear-gradient(to bottom right, #2b2b2c 0%, #1e1e1f 100%);
@@ -432,10 +475,20 @@ button {
   gap: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
+@media (max-width: 1024px) {
+  .services-grid .service-card {
+    padding: 20px;
+  }
+}
 .services-grid .service-card .service-icon {
   color: #FFD60A;
   font-size: 2.2rem;
   margin-top: 5px;
+}
+@media (max-width: 1024px) {
+  .services-grid .service-card .service-icon {
+    font-size: 1.8rem;
+  }
 }
 .services-grid .service-card h4 {
   margin-bottom: 8px;
@@ -447,13 +500,12 @@ button {
   line-height: 1.6;
 }
 
-/* scss/components/_content.scss */
 /* --- SECTION SKILLS --- */
 .skills-banner {
   display: flex;
   gap: 30px;
   overflow-x: auto;
-  padding: 30px 10px 30px;
+  padding: 20px 10px 30px;
   scrollbar-width: none;
 }
 .skills-banner::-webkit-scrollbar {
@@ -472,6 +524,14 @@ button {
   overflow: hidden;
   transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   border: 1px solid rgba(255, 255, 255, 0.08);
+}
+@media (max-width: 1024px) {
+  .skills-banner .skill-card {
+    min-width: 130px;
+    height: 130px;
+    padding: 25px;
+    border-radius: 25px;
+  }
 }
 .skills-banner .skill-card::before {
   content: "";
@@ -513,7 +573,7 @@ button {
 }
 
 .skills-scrollbar-container {
-  width: 200px;
+  width: 150px;
   height: 4px;
   background: #2b2b2c;
   margin: 0 auto 50px;
@@ -549,16 +609,6 @@ button {
   margin: 40px auto 0;
 }
 
-@media (max-width: 768px) {
-  .services-grid {
-    grid-template-columns: 1fr;
-  }
-}
-@media (max-width: 768px) {
-  .main-content {
-    padding-bottom: 80px;
-  }
-}
 .resume-wrapper {
   margin-bottom: 50px;
 }
