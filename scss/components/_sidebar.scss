@@ -10,30 +10,34 @@
     padding: 30px;
     text-align: center;
     z-index: 10;
+    // --- AJOUT POUR LE TOGGLE ---
+    max-height: 1000px; 
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
 
     .sidebar-header {
         display: flex;
         flex-direction: column;
         align-items: center;
         margin-bottom: 30px;
+        position: relative; // Pour positionner le bouton toggle
 
-        // --- LE CONTENEUR (Fixe, permet au point vert de dépasser) ---
+        // --- LE CONTENEUR (Avatar) ---
         .avatar-container {
             position: relative;
             width: 150px;
             height: 150px;
             margin: 0 auto 20px;
-            // Pas d'overflow ici pour que le point vert soit entièrement visible
+            transition: 0.4s ease;
         }
 
-        // --- LA BOÎTE PIVOTANTE (Contient les images) ---
         .avatar-box {
             width: 100%;
             height: 100%;
             cursor: pointer;
-            perspective: 1000px; // Effet de profondeur 3D
+            perspective: 1000px;
             border-radius: 50%;
-            overflow: hidden; // Coupe les coins des images pour le cercle
+            overflow: hidden;
             position: relative;
             
             img {
@@ -41,50 +45,35 @@
                 top: 0; left: 0;
                 width: 100%; height: 100%;
                 object-fit: cover;
-
                 border-radius: 50%;
-                // 1. Force l'accélération matérielle sans perte de qualité
                 transform: translateZ(0);
-                // 2. Prévient le navigateur du changement pour optimiser le rendu
                 will-change: transform;
-                // 3. Améliore le rendu des images lors des mises à l'échelle
                 image-rendering: -webkit-optimize-contrast;
-                // 4. Force un lissage plus fin
                 -webkit-font-smoothing: antialiased;
-
                 transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-                backface-visibility: hidden; // Cache le dos de l'image pendant la rotation
+                backface-visibility: hidden;
             }
 
-            .avatar-bitmoji {
-                z-index: 2;
-                transform: rotateY(0deg) scale(1.01);
-            }
+            .avatar-bitmoji { z-index: 2; transform: rotateY(0deg) scale(1.01); }
+            .avatar-photo { z-index: 1; transform: rotateY(180deg); }
 
-            .avatar-photo {
-                z-index: 1;
-                transform: rotateY(180deg); // Déjà retournée par défaut
-            }
-
-            // --- ANIMATION AU CLIC (Gérée par le JS) ---
             &.is-flipped {
                 .avatar-bitmoji { transform: rotateY(180deg) scale(1.01); }
                 .avatar-photo { transform: rotateY(0deg) scale(1.01); z-index: 2; }
             }
         }
 
-        // --- LE POINT VERT (Désormais libre et visible) ---
         .status-dot {
             position: absolute;
-            bottom: 7px; // Placé sur le bord du cercle
+            bottom: 7px;
             right: 7px;
             width: 20px;
             height: 20px;
             background: #28e115;
             border: 3px solid #1e1e1f;
             border-radius: 50%;
-            z-index: 10; // Passe au-dessus de l'avatar-box
-            pointer-events: none; // Permet de cliquer "à travers" le point
+            z-index: 10;
+            pointer-events: none;
             animation: pulse-green 2s infinite;
         }
 
@@ -93,9 +82,27 @@
             background: #2b2b2c; font-size: 0.75rem; padding: 5px 15px;
             border-radius: 8px; color: #ffffff; width: fit-content;
         }
+
+        // --- BOUTON TOGGLE (Caché sur PC) ---
+        .info-toggle-btn {
+            display: none;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: linear-gradient(to bottom right, #3f3f40 0%, #1e1e1f 100%);
+            border: 1px solid #383838;
+            color: #FFD60A;
+            padding: 8px;
+            border-radius: 0 15px;
+            font-size: 12px;
+            cursor: pointer;
+            z-index: 11;
+            transition: 0.3s ease;
+            
+            i { transition: 0.3s ease; }
+        }
     }
 
-    // --- SECTION CONTACTS ---
     .sidebar-info {
         border-top: 1px solid #383838;
         padding-top: 30px;
@@ -109,58 +116,79 @@
             display: flex;
             align-items: center;
             gap: 15px;
-
             .icon-box {
-                flex-shrink: 0;
-                width: 44px;
-                height: 44px;
+                flex-shrink: 0; width: 44px; height: 44px;
                 background: linear-gradient(to bottom right, #3f3f40 0%, #1e1e1f 100%);
-                border: 1px solid #383838;
-                border-radius: 12px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-
+                border: 1px solid #383838; border-radius: 12px;
+                display: flex; align-items: center; justify-content: center;
                 i { color: #FFD60A !important; font-size: 1.1rem; }
             }
-
             .text {
-                overflow: hidden;
-                span { display: block; font-size: 0.65rem; color: #d6d6d6; text-transform: uppercase; margin-bottom: 2px; }
-                p { font-size: 0.85rem; color: #ffffff; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+                span { display: block; font-size: 0.65rem; color: #d6d6d6; text-transform: uppercase; }
+                p { font-size: 0.85rem; color: #ffffff; margin: 0; }
             }
         }
     }
 
-    // --- RÉSEAUX SOCIAUX ---
     .social-links {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        padding-top: 20px;
+        display: flex; justify-content: center; gap: 20px; padding-top: 20px;
         a {
-            color: #d6d6d6 !important;
-            font-size: 1.1rem;
-            transition: 0.3s ease;
-            opacity: 0.6;
+            color: #d6d6d6 !important; font-size: 1.1rem; transition: 0.3s ease; opacity: 0.6;
             &:hover { color: #ffffff; opacity: 1; transform: translateY(-3px); }
         }
     }
 }
 
-// --- ANIMATION DU POINT VERT ---
 @keyframes pulse-green {
     0% { box-shadow: 0 0 0 0 rgba(40, 225, 21, 0.7); }
     70% { box-shadow: 0 0 0 10px rgba(40, 225, 21, 0); }
     100% { box-shadow: 0 0 0 0 rgba(40, 225, 21, 0); }
 }
 
-
+// --- CONFIGURATION MOBILE TYPE IMAGE RÉFÉRENCE ---
 @media (max-width: 1024px) {
     .sidebar {
-        width: 100%; // Prend toute la largeur
-        position: static; // Ne reste plus collée en haut pour laisser défiler la page
+        width: 100%;
+        position: static;
         padding: 20px;
+        max-height: 115px; // État fermé (compact)
+        text-align: left;
+
+        &.active {
+            max-height: 1000px; // État ouvert
+            
+            .info-toggle-btn i { transform: rotate(180deg); }
+        }
+
+        .sidebar-header {
+            flex-direction: row; // Alignement horizontal
+            justify-content: flex-start;
+            gap: 20px;
+            margin-bottom: 0;
+
+            .avatar-container {
+                width: 80px; // Plus petit sur mobile
+                height: 80px;
+                margin: 0;
+            }
+
+            .header-info {
+                text-align: left;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .name { font-size: 1.1rem; margin-bottom: 4px; }
+
+            .info-toggle-btn {
+                display: block; // On l'affiche uniquement ici
+            }
+        }
+
+        // Cache les infos quand c'est fermé
+        .sidebar-more-info {
+            transition: 0.5s ease;
+        }
     }
 }

@@ -1,6 +1,6 @@
 /**
  * Fichier : js/main.js
- * Gestion de la navigation, du filtrage, de la barre de progression et de l'avatar
+ * Gestion de la navigation, du filtrage, de la barre de progression, de l'avatar et de la sidebar mobile
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -66,14 +66,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 4. GESTION DU FLIP DE L'AVATAR (AJOUTÉ) ---
-    // Cette partie détecte le clic sur l'id "avatar-flip" que nous avons mis dans le HTML
+    // --- 4. GESTION DU FLIP DE L'AVATAR ---
     const avatarFlip = document.getElementById('avatar-flip');
 
     if (avatarFlip) {
         avatarFlip.addEventListener('click', () => {
-            // Ajoute ou retire la classe .is-flipped à chaque clic
             avatarFlip.classList.toggle('is-flipped');
+        });
+    }
+
+    // --- 5. GESTION DE LA SIDEBAR MOBILE (MODIFIÉ) ---
+    // On place la logique ici pour s'assurer que les éléments sont bien chargés
+    const sidebar = document.querySelector("[data-sidebar]");
+    const sidebarBtn = document.querySelector("[data-sidebar-btn]");
+
+    if (sidebar && sidebarBtn) {
+        sidebarBtn.addEventListener("click", function () {
+            sidebar.classList.toggle("active");
         });
     }
 });
