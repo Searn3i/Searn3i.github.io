@@ -1,30 +1,23 @@
 .app-container {
-    display: flex;
-    justify-content: center;
+    display: flex; // Changement de grid à flex pour plus de flexibilité
+    justify-content: center; // Centre la sidebar et le contenu horizontalement
+    align-items: flex-start; // Aligne les deux blocs par le haut
     gap: 25px;
+    
     max-width: 1255px;
     width: 100%;
-    margin: 60px auto;
+    margin: 60px auto; // 'auto' assure un centrage parfait, peu importe le zoom
     padding: 0 20px;
+}
 
-    @media (max-width: 1024px) {
-        flex-direction: column;
-        align-items: center;
-        margin: 15px auto;
-        padding: 0 15px; // Espacement propre sur les bords
-        width: 100% !important;
-        overflow: hidden; 
-    }
+.sidebar {
+    width: 280px; // Ta largeur fixe définie précédemment
+    flex-shrink: 0; // Empêche la sidebar de rétrécir sur les écrans moyens
 }
 
 .main-content {
-    width: 950px;
-    min-width: 0; // Permet au flexbox de réduire la taille sous 950px
-
-    @media (max-width: 1024px) {
-        width: 100% !important; // Supprime les 950px sur mobile
-        max-width: 100%;
-    }
+    width: 950px; // Ta largeur de contenu définie précédemment
+    flex-shrink: 1; // Permet au contenu de s'adapter si l'écran est un peu plus petit
 }
 
 .sidebar, .main-content {
@@ -32,17 +25,14 @@
     border: 1px solid $border-color;
     border-radius: $radius;
     padding: 30px;
-
-    @media (max-width: 1024px) {
-        padding: 20px 15px; // Padding plus fin pour gagner de l'espace sur mobile
-        width: 100%;
-        max-width: 100%; // On enlève la limite des 500px pour que ça remplisse bien l'écran
-    }
 }
 
-// Nettoyage final pour les petits écrans
-@media (max-width: 768px) {
-    .sidebar, .main-content {
-        border-radius: 15px; // Arrondis légèrement plus petits sur téléphone
+// --- RESPONSIVITÉ (TABLETTE ET MOBILE) ---
+@media (max-width: 1024px) {
+    .app-container {
+        flex-direction: column; // Empile les éléments verticalement
+        align-items: center; // Centre la sidebar et le contenu sur mobile
+        margin: 20px auto;
+        gap: 20px;
     }
 }
