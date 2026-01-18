@@ -8,162 +8,212 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/main.css">
 
     <style>
-        
-         /* ===============================
-           FIX ESPACE NOIR MOBILE
-           =============================== */
+        /* --- GLOBAL --- */
+        * { font-family: 'Inter', sans-serif !important; }
 
-        /* Le canvas ne doit JAMAIS pousser le contenu */
         #bg-canvas {
-            position: fixed;
-            inset: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            pointer-events: none;
-            background: #121212;
+            position: fixed; inset: 0; width: 100vw; height: 100vh;
+            z-index: -1; pointer-events: none; background: #121212;
         }
 
+        /* --- FIX SVG ICONS (General) --- */
+        .icon-box {
+            display: flex !important; align-items: center !important; justify-content: center !important;
+            width: 40px !important; height: 40px !important;
+        }
+        .icon-box svg {
+            width: 20px !important; height: 20px !important; display: block !important; fill: #FFD60A !important;
+        }
+
+        /* --- CENTRAGE HEADER GLOBAL --- */
+        .sidebar .sidebar-header .header-info {
+            display: flex !important; flex-direction: column !important; align-items: center !important;
+            justify-content: center !important; text-align: center !important; width: 100% !important;
+        }
+        .sidebar .sidebar-header .role-tag { margin: 5px auto 0 auto !important; display: inline-block !important; }
+
+        /* ======================================================= */
+        /* MOBILE DESIGN SYSTEM (PREMIUM APP FEEL)               */
+        /* ======================================================= */
         @media (max-width: 1024px) {
-            /* 1. On tue l'espace vide du body et le centrage flex */
             body, html {
-                padding: 0 !important;
-                margin: 0 !important;
-                display: block !important;
-                width: 100% !important;
-                min-height: 100vh !important;
-                background-color: #121212 !important;
-                overflow-x: hidden !important;
+                padding: 0 !important; margin: 0 !important; display: block !important;
+                width: 100% !important; min-height: 100vh !important;
+                background-color: #121212 !important; overflow-x: hidden !important;
             }
 
-            /* 2. On remonte le conteneur tout en haut (Pixel 0) */
             .app-container {
-                margin: 0 !important;
-                padding: 0 !important;
-                width: 100% !important;
-                max-width: 100% !important;
-                gap: 0 !important;
-                transform: none !important;
-                top: 0 !important;
-                display: block !important;
+                margin: 0 !important; padding: 0 !important; width: 100% !important;
+                max-width: 100% !important; gap: 0 !important; transform: none !important;
+                top: 0 !important; display: block !important;
             }
 
-            /* 3. On colle la Sidebar au plafond */
-            .sidebar {
-                position: sticky !important;
-                top: 0 !important;
-                margin: 0 !important;
-                width: 100% !important;
-                max-width: 100% !important;
-                border-radius: 0 0 20px 20px !important;
-                border-top: none !important;
-                border-left: none !important;
-                border-right: none !important;
-                z-index: 9999 !important;
-                background: #1e1e1f !important;
-            }
-
-            /* 4. On s'assure que le contenu suit sans marge */
+            /* --- PADDING BAS POUR LA NAVBAR FLOTTANTE --- */
             .main-content {
-                margin: 0 !important;
-                width: 100% !important;
-                max-width: 100% !important;
-                border-radius: 0 !important;
-                border: none !important;
-                padding-bottom: 80px !important;
+                margin: 0 !important; width: 100% !important; border-radius: 0 !important;
+                border: none !important; 
+                padding-bottom: 120px !important;
             }
 
-            /* 5. FIX SERVICES (WHAT I'M DOING) */
-            .services-grid {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 20px !important;
+            /* --- SIDEBAR --- */
+            .sidebar {
+                position: sticky !important; top: 0 !important; margin: 0 !important;
+                width: 100% !important; max-width: 100% !important;
+                border-radius: 0 0 25px 25px !important; border: none !important;
+                z-index: 9999 !important; background: #1e1e1f !important;
+                padding: 20px 15px !important;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.4) !important;
             }
 
-            .service-card {
-                width: 100% !important;
-                padding: 20px !important;
-                height: auto !important;
-                min-height: 0 !important;
-            }
-
-            .service-icon { margin-bottom: 10px !important; }
-            .service-content h4 { font-size: 1.1rem !important; margin-bottom: 5px !important; }
-            .service-content p { font-size: 0.9rem !important; line-height: 1.4 !important; }
-
-            /* 6. FIX SKILLS (LOGOS TROP GROS) */
-            .skills-banner {
-                display: flex !important;
-                flex-wrap: wrap !important;
-                justify-content: center !important;
-                gap: 15px !important;
-                padding: 10px 0 !important;
-                background: transparent !important;
-                box-shadow: none !important;
-            }
-
-            .skill-card {
-                width: 60px !important;
-                height: 60px !important;
-                padding: 12px !important;
-                background: #2b2b2c !important;
-                border-radius: 12px !important;
-                border: 1px solid #383838 !important;
-                display: flex !important;
-                align-items: center !important;
-                justify-content: center !important;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important;
-            }
-
-            .skill-card img {
-                width: 100% !important;
-                height: 100% !important;
-                object-fit: contain !important;
-            }
-
-            .skills-scrollbar-container { display: none !important; }
-
-            /* 7. FIX HEADER ALIGNMENT (CENTRAGE C.S STUDENT) */
             .sidebar-header {
-                display: flex !important;
-                flex-direction: row !important; /* Garde l'avatar à gauche */
-                align-items: center !important; /* Aligne verticalement */
-                gap: 15px !important;
+                position: relative !important; display: flex !important; flex-direction: row !important;
+                align-items: center !important; justify-content: center !important;
+                width: 100% !important; min-height: 60px;
             }
 
             .avatar-container {
-                margin: 0 !important; /* Supprime les marges parasites */
-                width: 60px !important;
-                height: 60px !important;
+                position: absolute !important; left: 0 !important; margin: 0 !important;
+                width: 60px !important; height: 60px !important; z-index: 10;
             }
 
-            /* C'EST ICI QUE SE JOUE LE CENTRAGE */
-            .header-info {
-                flex-grow: 1 !important; /* Prend tout l'espace restant à droite */
+            .header-info { padding: 0 50px !important; z-index: 5; }
+            .name { margin: 0 !important; font-size: 1.2rem !important; font-weight: 700 !important; white-space: nowrap; }
+            .role-tag { background: #2b2b2c !important; padding: 4px 12px !important; border-radius: 6px !important; font-size: 0.75rem !important; }
+            
+            /* --- BOUTON PREMIUM + NOUVEAU VECTEUR --- */
+            .info-toggle-btn {
+                position: absolute !important;
+                top: 15px !important;
+                right: 15px !important;
+                z-index: 20 !important;
+                
+                /* Style Premium Rounded Container */
+                width: 40px !important;
+                height: 40px !important;
+                border-radius: 50% !important;
+                background: linear-gradient(145deg, #2b2b2c, #1e1e1f) !important;
+                border: 1px solid rgba(255, 214, 10, 0.3) !important;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.1) !important;
+                
                 display: flex !important;
-                flex-direction: column !important;
-                align-items: center !important; /* <--- FORCE LE CENTRAGE HORIZONTAL */
+                align-items: center !important;
                 justify-content: center !important;
-                text-align: center !important;
+                transition: all 0.2s ease !important;
+                padding: 0 !important; /* Reset padding pour le SVG */
+            }
+            
+            /* Style du nouveau vecteur SVG */
+            .info-toggle-btn svg {
+                width: 22px !important;
+                height: 22px !important;
+                stroke: #FFD60A !important; /* Couleur OR */
+                transition: transform 0.3s ease !important;
             }
 
-            .name {
+            /* Rotation du vecteur quand actif */
+            .sidebar.active .info-toggle-btn svg {
+                transform: rotate(180deg) !important;
+            }
+
+            .info-toggle-btn:active {
+                transform: scale(0.95) !important;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+            }
+
+            /* --- SERVICES (STACK) --- */
+            .services-grid { display: flex !important; flex-direction: column !important; gap: 15px !important; }
+            .service-card { width: 100% !important; padding: 20px !important; border-radius: 16px !important; }
+
+            /* --- SKILLS: GRILLE PREMIUM (4 COLONNES) --- */
+            .skills-banner {
+                display: grid !important;
+                grid-template-columns: repeat(4, 1fr) !important;
+                gap: 12px !important;
+                padding: 10px 0 !important;
+                justify-items: center !important;
+            }
+
+            .skill-card {
+                width: 100% !important;
+                aspect-ratio: 1/1 !important;
+                height: auto !important;
+                min-height: 0 !important;
+                padding: 10px !important;
+                background: #2b3d5b !important;
+                border-radius: 14px !important;
+                border: 1px solid rgba(255, 255, 255, 0.08) !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+            }
+
+            .skill-card img {
+                width: 50% !important;
+                height: 50% !important;
+                object-fit: contain !important;
+            }
+            .skills-scrollbar-container { display: none !important; }
+
+            /* --- NAVBAR FLOTTANTE (DOCK STYLE) --- */
+            .navbar {
+                position: fixed !important;
+                bottom: 20px !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                width: 92% !important;
+                max-width: 400px !important;
+                background: rgba(30, 30, 31, 0.85) !important;
+                backdrop-filter: blur(15px) !important;
+                -webkit-backdrop-filter: blur(15px) !important;
+                border: 1px solid rgba(255, 255, 255, 0.1) !important;
+                border-radius: 20px !important;
+                padding: 0 10px !important;
+                z-index: 10000 !important;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.5) !important;
+            }
+
+            .nav-list {
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                height: 60px !important;
+                padding: 0 !important;
                 margin: 0 !important;
-                font-size: 1.1rem !important;
-                line-height: 1.2 !important;
+                list-style: none !important;
             }
 
-            .role-tag {
-                margin: 5px 0 0 0 !important; /* Petit espace au-dessus */
-                display: inline-block !important; /* S'assure qu'il ne prend pas toute la largeur */
+            .nav-list li { flex: 1 !important; text-align: center !important; }
+
+            .nav-link {
+                background: transparent !important;
+                border: none !important;
+                color: #888 !important;
                 font-size: 0.7rem !important;
-                padding: 4px 12px !important;
+                font-weight: 500 !important;
+                padding: 10px 0 !important;
+                width: 100% !important;
+                display: block !important;
+                transition: 0.3s ease !important;
             }
+
+            .nav-link.active {
+                color: #FFD60A !important;
+                font-weight: 700 !important;
+                transform: scale(1.1) !important;
+            }
+
+            /* Fix Blog & Contact */
+            .blog-list { display: flex !important; flex-direction: column !important; gap: 20px !important; }
+            .blog-item { width: 100% !important; background: #2b2b2c !important; border-radius: 16px !important; border: 1px solid #383838 !important; overflow: hidden !important; margin-bottom: 10px !important; }
+            .blog-img-box { height: 180px !important; }
+            .blog-img-box img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
+            .blog-content { padding: 15px !important; }
         }
     </style>
 </head>
@@ -178,7 +228,6 @@
                         <img src="./assets/images/my-bitmoji.png" alt="Nasser Ouédraogo" class="avatar-bitmoji">
                         <img src="./assets/images/my-photo.png" alt="Photo réelle" class="avatar-photo">
                     </div>
-    
                     <span class="status-dot" data-title="Available for work!"></span>
                 </div>
                 
@@ -188,32 +237,44 @@
                 </div>
 
                 <button class="info-toggle-btn" data-sidebar-btn>
-                    <i class="fa-solid fa-chevron-down"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 9l6 6 6-6"/>
+                    </svg>
                 </button>
             </div>
 
             <div class="sidebar-more-info">
                 <div class="sidebar-info">
                     <div class="info-item">
-                        <div class="icon-box"><i class="fa-regular fa-envelope"></i></div>
-                        <div class="text">
-                            <span>EMAIL</span>
-                            <p><a href="mailto:nasserworkspace@gmail.com" style="color: inherit; text-decoration: none;">nasserworkspace@gmail.com</a></p>
+                        <div class="icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48Zm-8,16V67.29l-86.38,77.74a4,4,0,0,1-5.24,0L32,67.29V64Zm0,128H40V88.71l80.38,72.34a20,20,0,0,0,27.24,0L224,88.71Z"></path></svg>
                         </div>
+                        <div class="text"><span>EMAIL</span><p><a href="mailto:nasserworkspace@gmail.com" style="color: inherit; text-decoration: none;">nasserworkspace@gmail.com</a></p></div>
                     </div>
                     <div class="info-item">
-                        <div class="icon-box"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                        <div class="icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path d="M176,16H80A24,24,0,0,0,56,40V216a24,24,0,0,0,24,24h96a24,24,0,0,0,24-24V40A24,24,0,0,0,176,16Zm8,200a8,8,0,0,1-8,8H80a8,8,0,0,1-8-8V40a8,8,0,0,1,8-8h96a8,8,0,0,1,8,8Z"></path></svg>
+                        </div>
                         <div class="text"><span>PHONE</span><p>+32 0472116848</p></div>
                     </div>
                     <div class="info-item">
-                        <div class="icon-box"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.88,38.24,8,8,0,0,0,8.24,0A254.19,254.19,0,0,0,174,212.25c27.49-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Zm0,206.53C113.84,210.82,56,154,56,104a72,72,0,0,1,144,0C200,154,142.16,210.82,128,222.53Z"></path></svg>
+                        </div>
                         <div class="text"><span>LOCATION</span><p>Namur, Belgium</p></div>
                     </div>
                 </div>
+
                 <div class="social-links">
-                    <a href="https://www.linkedin.com/in/nasser-ouedraogo-1b0815340?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="https://github.com/Searn3i" target="_blank"><i class="fa-brands fa-github"></i></a>
-                    <a href="https://x.com/OUEDRAO56054161" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/in/nasser-ouedraogo-1b0815340?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" style="display: flex; align-items: center; justify-content: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 256 256" fill="#d6d6d6"><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm-8-24a12,12,0,1,1,12-12A12,12,0,0,1,88,88Zm112,52v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0v11a32,32,0,0,1,56,17Z"></path></svg>
+                    </a>
+                    <a href="https://github.com/Searn3i" target="_blank" style="display: flex; align-items: center; justify-content: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 256 256" fill="#d6d6d6"><path d="M128,24A104,104,0,0,0,95.12,226.77c5.2,1,7.1-2.25,7.1-5s-.09-19.46-.14-36.63c-28.93,6.29-35-13.8-35-13.8-4.73-12-11.55-15.19-11.55-15.19-9.45-6.46.72-6.33.72-6.33,10.45.74,15.95,10.73,15.95,10.73,9.28,15.89,24.36,11.3,30.3,8.64a22.28,22.28,0,0,1,6.63-14c-23.09-2.63-47.37-11.55-47.37-51.41a40.16,40.16,0,0,1,10.72-27.93c-1.07-2.73-4.66-13.21,1-27.53,0,0,8.74-2.8,28.63,10.67a99.37,99.37,0,0,1,52.12,0c19.87-13.47,28.61-10.67,28.61-10.67,5.71,14.32,2.12,24.8,1.06,27.53a40.12,40.12,0,0,1,10.74,27.93c0,39.95-24.31,48.74-47.46,51.32,3.46,3,6.54,8.87,6.54,17.88,0,12.91-.12,23.32-.12,26.5s1.88,6,7.14,5A104,104,0,0,0,128,24Z"></path></svg>
+                    </a>
+                    <a href="https://x.com/OUEDRAO56054161" target="_blank" style="display: flex; align-items: center; justify-content: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 256 256" fill="#d6d6d6"><path d="M214.77,216H183.18L130.4,142.92,86.67,216H41.23L106.88,109.18,48,27.67H79.62l48.24,67.62L167.33,27.67h45.42L148.51,123.63Zm-31.54-15h14.8L93.2,39H77.16Z"></path></svg>
+                    </a>
                 </div>
             </div>
         </aside>
@@ -247,16 +308,21 @@
                 </div>
 
                 <h3 class="subsection-title">What I'm Doing</h3>
+                
                 <div class="services-grid">
                     <div class="service-card">
-                        <div class="service-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                        <div class="service-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 256 256" fill="#FFD60A"><path d="M71.68,97.22,34.74,128l36.94,30.78a8,8,0,0,1-10.26,12.32l-42.66-35.56a8,8,0,0,1,0-12.31L61.42,84.9a8,8,0,0,1,10.26,12.32Zm164.22,24.33L193.24,85.1A8,8,0,0,0,183,97.42L219.86,128l-36.88,30.58a8,8,0,0,0,10.26,12.32l42.66-35.36a8,8,0,0,0,0-12.31ZM163,35.64a8,8,0,0,0-9.74,5.7l-64,208a8,8,0,0,0,5.7,9.74,8.12,8.12,0,0,0,2.37.36,8,8,0,0,0,7.37-5.7l64-208A8,8,0,0,0,163,35.64Z"></path></svg>
+                        </div>
                         <div class="service-content">
                             <h4>Web Development</h4>
                             <p>High-quality development of sites at the professional level.</p>
                         </div>
                     </div>
                     <div class="service-card">
-                        <div class="service-icon"><i class="fa-solid fa-pen-nib"></i></div>
+                        <div class="service-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 256 256" fill="#FFD60A"><path d="M172,168a44.05,44.05,0,0,1-44-44,44.05,44.05,0,0,1,44-44,44.05,44.05,0,0,1,44,44A44.05,44.05,0,0,1,172,168Zm-88,0a44.05,44.05,0,0,1-44-44,44.05,44.05,0,0,1,44-44,44.05,44.05,0,0,1,84,168Zm0,88a44.05,44.05,0,0,1-44-44V84a44,44,0,0,1,88,0v84A44.05,44.05,0,0,1,84,256Zm88-176a44,44,0,0,1,44-44H84A44,44,0,0,1,84,80Z" opacity="0.2"></path><path d="M172,32H84A52,52,0,0,0,32,84v84a52,52,0,0,0,104,0V160.55A52,52,0,1,0,172,32ZM84,152a36,36,0,1,1,36-36A36,36,0,0,1,84,152Zm0,88a36,36,0,0,1-36-36V165.84A51.58,51.58,0,0,0,84,168a52.06,52.06,0,0,0,52-52V84a36,36,0,0,1,0,72h0A36,36,0,0,1,84,240Zm88-104a36,36,0,1,1,36-36A36,36,0,0,1,172,136Z"></path></svg>
+                        </div>
                         <div class="service-content">
                             <h4>UI/UX Design</h4>
                             <p>The most modern and high-quality design made at a professional level.</p>
